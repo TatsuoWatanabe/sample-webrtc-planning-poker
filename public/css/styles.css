@@ -77,10 +77,10 @@
   height: 194.16px;
 }
 .card-area-container .card-panel.face-down {
-  background-image: url('/svg/mizutama.svg');
+  background-image: url('../svg/mizutama.svg');
 }
 .card-area-container .card-panel.face-up {
-  background-image: url('/svg/check.svg');
+  background-image: url('../svg/check.svg');
   padding: 0;
 }
 /* materialize css overrides */

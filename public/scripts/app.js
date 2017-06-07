@@ -118,7 +118,7 @@ class SampleWebrtcPlanningPorkerApp {
   onPeerLeave(peerId) {
     console.log(peerId, 'leaved.');
 
-    //
+    // Popup leaved member's name.
     const members = this.members || {};
     const leaverName = members[peerId] || `Someone(${peerId})`;
     this.toast(`${leaverName} leaved.`);
@@ -250,7 +250,7 @@ class SampleWebrtcPlanningPorkerApp {
 
     $card.removeClass('face-down').addClass('face-up').html(`
       <svg width="100%" height="100%">
-        <text x="50%" y="10%" font-size="1rem" text-anchor="middle" >${dispName}</text>
+        <text x="50%" y="10%" font-size="1rem" text-anchor="middle">${dispName}</text>
         <text x="50%" y="50%" font-size="4.5rem" text-anchor="middle" dominant-baseline="middle">
           ${cardValue}
         </text>
