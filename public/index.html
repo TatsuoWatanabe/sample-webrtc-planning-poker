@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>sample-webrtc</title>
+  <meta charset="utf-8">
+  <!--Let browser know website is optimized for mobile-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <script type='text/javascript' src='https://cdn.skyway.io/skyway.js'></script>
+
+  <!--Import Google Icon Font-->
+  <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!--Import materialize CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.css">
+  <!--Import jQuery before materialize.js-->
+  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.js"></script>
+
+  <link rel="stylesheet" href="css/styles.css" />
+  <script src="scripts/app.js"></script>
+  <script>
+    const app = new SampleWebrtcPlanningPorkerApp();
+    $(() => {
+      app.start();
+    });
+  </script>
+</head>
+
+<body>
+  <nav>
+    <div class="nav-wrapper">
+      <span class="brand-logo center">Webrtc Planning Porker</span>
+    </div>
+  </nav>
+
+  <ul class="collapsible info-area no-margin" data-collapsible="accordion">
+    <li>
+      <div class="collapsible-header">
+        <i class="material-icons left">settings</i>
+        <span class="self-state-area"></span>
+      </div>
+      <div class="collapsible-body">
+
+        <!-- Name Setting -->
+        <div class="row no-margin">
+          <div class="col left-column s12 m6">
+            <i class="material-icons left">person</i>
+            <span class="self-name-area"></span>
+          </div><!--/.col -->
+          <div class="col right-column s12 m6">
+            <label class="label">Name:</label>
+            <div class="input-field inline">
+              <input id="tbox-disp-name" class="disable-on-connect" type="text" maxlength="40"  />
+              <button class="disable-on-connect waves-effect waves-light btn purple darken-1" onclick="app.setDispName($(this).prev('input').val());">
+                <i class="material-icons">done</i>
+              </button>
+            </div><!--/.input-field -->
+          </div><!--/.col -->
+        </div><!--/.row -->
+
+        <!-- API Key Setting -->
+        <div class="row no-margin">
+          <div class="col left-column s12 m6">
+            <i class="material-icons left">cloud</i>
+            <span class="api-key-area"></span>
+          </div><!--/.col -->
+          <div class="col right-column s12 m6">
+            <label class="label">API Key:</label>
+            <div class="input-field inline">
+              <input id="tbox-api-key" class="disable-on-connect" type="text" maxlength="40" placeholder="enter your skyway api key" />
+              <button class="disable-on-connect waves-effect waves-light btn purple darken-1" onclick="app.setApiKey($(this).prev('input').val());">
+                <i class="material-icons">done</i>
+              </button>
+            </div><!--/.input-field -->
+          </div><!--/.col -->
+        </div><!--/.row -->
+
+        <!-- Room Name Setting -->
+        <div class="row no-margin">
+          <div class="col left-column s12 m6">
+            <i class="material-icons left">panorama_wide_angle</i>
+            <span class="room-name-area"></span>
+          </div><!--/.col -->
+          <div class="col right-column s12 m6">
+            <label class="label">Room:</label>
+            <div class="input-field inline">
+              <input id="tbox-room-name" class="disable-on-connect" type="text" maxlength="40" />
+              <button class="disable-on-connect waves-effect waves-light btn purple darken-1" onclick="app.setRoomName($(this).prev('input').val());">
+                <i class="material-icons">done</i>
+              </button>
+            </div><!--/.input-field -->
+          </div><!--/.col -->
+        </div><!--/.row -->
+
+       <!-- Connect -->
+        <div class="row no-margin">
+          <div class="col left-column s12 m6">
+            <i class="material-icons left">cast</i>
+            <span class="connected-area"></span>
+          </div><!--/.col -->
+          <div class="col right-column s12 m6">
+            <label class="label">Connect:</label>
+            <div class="input-field inline">
+              <button id="btn-connect"  class="waves-effect waves-light btn purple darken-1" onclick="app.connect();">
+                <i class="material-icons">play_arrow</i>
+              </button>
+              <button id="btn-disconnect" class="waves-effect waves-light btn red" onclick="app.disconnect();">
+                <i class="material-icons">stop</i>
+              </button>
+            </div><!--/.input-field -->
+          </div><!--/.col -->
+        </div><!--/.row -->
+
+      </div><!--/.collapsible-body -->
+    </li>
+  </ul>
+
+  <main>
+    <div class="row">
+      <div class="col s7 card-area-container">
+        <div id="card-area"></div>
+      </div>
+      <div class="col s5 chat-area-container">
+        <div id="chat-area"></div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="page-footer">
+    <div class="row">
+      <div class="left-column col s8 m10">
+        <div class="row">
+          <div class="input-field right-align col s12">
+            <button class="waves-effect waves-light btn indigo darken-1" onclick="app.facedown()">
+              <i class="material-icons">flip_to_back</i>
+            </button>
+            <button class="waves-effect waves-light btn indigo lighten-1" onclick="app.faceup()">
+              <i class="material-icons">flip_to_front</i>
+            </button>
+            <button class="waves-effect waves-light btn green darken-4" onclick="app.pullCard()">
+              <i class="material-icons">get_app</i>
+            </button>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s9 m10 l11">
+            <textarea id="tbox-msg" rows="1" class="materialize-textarea"></textarea>
+          </div>
+          <div class="input-field right-align col s3 m2 l1">
+            <button class="waves-effect waves-light btn" onclick="app.sendMessage();">
+              <i class="material-icons">chat_bubble</i>
+            </button>
+          </div>
+        </div><!--/.row -->
+      </div><!--/.footer-left-column -->
+      <div class="input-field col s4 m2 v-btns put-card-area">
+      </div>
+    </div><!--/.row -->
+  </footer>
+</body>
+
+</html>
