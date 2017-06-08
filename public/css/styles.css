@@ -99,6 +99,7 @@ textarea.materialize-textarea {
   margin-bottom: 0;
   height: 1.9rem;
   min-height: 1.9rem;
+  border-bottom-color: black;
 }
 .page-footer {
   padding-top: 0px;

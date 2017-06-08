@@ -1,9 +1,11 @@
 class SampleWebrtcPlanningPorkerApp {
   get roomMode() { return { mesh: 'mesh', sfu: 'sfu' }; }
   get cardValues() { return [1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233]; }
+  get appColor() { return { connected: 'green accent-4', notConnected: 'light-green darken-1'}; }
  
   start() {
     this.el = {
+      $appColor         : $('.app-color'),
       $selfStateArea    : $('.self-state-area'),
       $selfNameArea     : $('.self-name-area'),
       $disableOnConnect : $('.disable-on-connect'),
@@ -168,6 +170,7 @@ class SampleWebrtcPlanningPorkerApp {
 
   applyConnected(isConnected = false) {
     const nc = 'Not connected.';
+    this.setAppColor(isConnected ? this.appColor.connected : this.appColor.notConnected);
     this.el.$selfStateArea.text(isConnected ? `Your Peer id is ${this.peer.id}` : nc);
     this.el.$connectedArea.text(isConnected ? 'Connected.' : nc);
     this.el.$btnConnect.toggle(!isConnected);
@@ -198,6 +201,15 @@ class SampleWebrtcPlanningPorkerApp {
 
   getCard(id) {
     return $(`.card-${id}`);
+  }
+
+  setAppColor(colorName) {
+    const ac = 'app-color';
+    const oldColor = this.el.$appColor.data(ac);
+    this.el.$appColor.removeClass(oldColor);
+    this.el.$appColor.addClass(colorName);
+    // remeber current color className.
+    this.el.$appColor.data(ac, colorName);
   }
 
   setDispName(val) {
