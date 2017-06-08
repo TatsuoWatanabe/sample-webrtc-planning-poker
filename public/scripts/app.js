@@ -132,7 +132,7 @@ class SampleWebrtcPlanningPorkerApp {
   }
 
   getRandomName() {
-    const names = ['Jobs', 'Gates', 'Larry', 'Jeff', 'Alan', 'Dennis'];
+    const names = ['Jobs', 'Wozniak', 'Gates', 'Larry', 'Bezos', 'Turing', 'Ritchie', 'Torvalds', 'Kay', 'Neumann', 'Moore'];
     return names[Math.floor(Math.random() * names.length)];
   }
 
