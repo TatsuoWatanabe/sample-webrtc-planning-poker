@@ -50,7 +50,7 @@ class SampleWebrtcPlanningPorkerApp {
       if (e.ctrlKey &&
           e.keyCode === keyCodeEnter &&
           $(document.activeElement).is(this.el.$tboxMsg)) {
-
+        // send message if focus is on textarea.
         this.sendMessage();
         e.preventDefault();
       }
