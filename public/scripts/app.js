@@ -136,6 +136,25 @@ class SampleWebrtcPlanningPorkerApp {
     return names[Math.floor(Math.random() * names.length)];
   }
 
+  getClassNameById(id) {
+    const numStr = id.replace(/\D/g, '') || '1';
+    const index  = parseInt(numStr.slice(-1));
+    const classNames = [
+      /* 0 */ 'teal',
+      /* 1 */ 'teal lighten-3',
+      /* 2 */ 'red lighten-3',
+      /* 3 */ 'red lighten-5',
+      /* 4 */ 'deep-purple accent-1',
+      /* 5 */ 'deep-purple accent-2',
+      /* 6 */ 'blue lighten-1',
+      /* 7 */ 'blue lighten-4',
+      /* 8 */ 'purple accent-1',
+      /* 9 */ 'purple accent-2'
+    ];
+    const className = classNames[index] || classNames[0];
+    return className;
+  }
+
   applyConnected(isConnected = false) {
     const nc = 'Not connected.';
     this.el.$selfStateArea.text(isConnected ? `Your Peer id is ${this.peer.id}` : nc);
@@ -288,10 +307,11 @@ class SampleWebrtcPlanningPorkerApp {
   receiveMessage(id, data) {
     const message  = data.message;
     const dispName = data.dispName || id;
+    const color = this.getClassNameById(id);
     if (!message) { return; }
 
     this.el.$chatArea.append(
-      `<div class="card-panel teal">${dispName}:` +
+      `<div class="card-panel ${color}">${dispName}:` +
         `<pre class="no-margin">${message}</pre>` +
       `</div>`
     );
