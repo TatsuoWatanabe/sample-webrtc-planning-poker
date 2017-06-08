@@ -44,6 +44,17 @@ class SampleWebrtcPlanningPorkerApp {
         }, 200);
       }).resize();
     }
+    // Send message on Ctrl + Enter keydown.
+    $(window).keydown((e) => {
+      const keyCodeEnter = 13;
+      if (e.ctrlKey &&
+          e.keyCode === keyCodeEnter &&
+          $(document.activeElement).is(this.el.$tboxMsg)) {
+
+        this.sendMessage();
+        e.preventDefault();
+      }
+    });
   }
 
   /** create peer connection. */
