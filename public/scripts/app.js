@@ -61,6 +61,10 @@ class SampleWebrtcPlanningPorkerApp {
 
   /** create peer connection. */
   connect() {
+    this.setDispName(this.el.$tboxDispName.val());
+    this.setApiKey(this.el.$tboxApiKey.val());
+    this.setRoomName(this.el.$tboxRoomName.val());
+
     this.peer = new Peer({ key: this.apiKey });
     this.peer.on('open', (id) => this.onPeerOpen(id));
   }
